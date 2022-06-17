@@ -20,7 +20,7 @@ class Despesa {
     }
 }
 
-class Bd { //Aqui criamos a lógica de indices dinâmicos, achei massa pq ja tentei usar o localstorage dessa forma e não tinha conseguido.
+class Bd { //Aqui criamos a lógica de indices dinâmicos, achei massa pq ja tentei usar o localstorage dessa forma e não consegui.
     constructor() {
 
         let id = localStorage.getItem('id')//Ao iniciar, se for null, o prox valor é 0, torando o id após cada insercao    
@@ -68,7 +68,7 @@ function cadastrarDespesa() {
     if (despesa.validarDados()) {
         bd.gravar(despesa) //Salvando no localStorage ao criar um item
 
-        let novoTitulo = document.getElementById('exampleModalLabel') //Desafio utilizando apenas 1 modal, para exibir tanto certo quanto errado. **
+        let novoTitulo = document.getElementById('titulo_modal') //Desafio utilizando apenas 1 modal, para exibir tanto certo quanto errado. **
         let descricaoCampo = document.getElementById('cadastroSucesso')
 
         //Capturando a class do elemento pai
@@ -87,7 +87,7 @@ function cadastrarDespesa() {
 
     } else {
 
-        let novoTitulo = document.getElementById('exampleModalLabel')
+        let novoTitulo = document.getElementById('titulo_modal')
         let descricaoCampo = document.getElementById('cadastroSucesso')
 
         //Capturando a class do elemento pai
@@ -101,7 +101,7 @@ function cadastrarDespesa() {
         novoTitulo.innerHTML = 'Erro de gravação'
         descricaoCampo.innerHTML = 'Existem campos obrigatórios que não foram preenchidos'
 
-        //Chamando o modal Sucesso pelo Jquery.
+        //Chamando o modal Error pelo Jquery.
         $('#modalRegistraDespesa').modal('show') 
     }
 
