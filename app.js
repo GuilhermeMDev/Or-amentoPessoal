@@ -41,6 +41,27 @@ class Bd { //Aqui criamos a lógica de indices dinâmicos, achei massa pq ja ten
 
         localStorage.setItem('id', id)
     }
+
+    //Recuperar dados salvos, ao carregar a página. Usando o onloa no body.
+    recuperarTodosRegistros() {
+        let despesas = []
+
+        let id = localStorage.getItem('id')
+
+        //Recuperando todas as despesas cadastradas em localStorage
+        for (let i = 1; i <= id; i++) {
+            //Recuperar despesa
+            let despesa = JSON.parse(localStorage.getItem(i))
+
+            //verificar se existe a possibilidade de indices pulados ou removidos,
+            //Neste caso vamos pular esses índices..
+            if (despesa === null) {
+                continue
+            }
+            despesas.push(despesa)
+        }
+        return despesas
+    }
 }
 
 let bd = new Bd()
@@ -81,7 +102,7 @@ function cadastrarDespesa() {
 
         novoTitulo.innerHTML = 'Registro inserido com sucesso'
         descricaoCampo.innerHTML = 'Despesa cadastrada com sucesso'
-        
+
         //Chamando o modal Sucesso pelo Jquery.
         $('#modalRegistraDespesa').modal('show')
 
@@ -102,7 +123,46 @@ function cadastrarDespesa() {
         descricaoCampo.innerHTML = 'Existem campos obrigatórios que não foram preenchidos'
 
         //Chamando o modal Error pelo Jquery.
-        $('#modalRegistraDespesa').modal('show') 
+        $('#modalRegistraDespesa').modal('show')
     }
 
+}
+
+function carregaListaDespesa() {
+    let despesas = [] //Recebendo o array ja verificado do localstorage ao carregar a página.
+
+    despesas = bd.recuperarTodosRegistros()
+
+    //Elemento tbody (consulta)
+    let listaDespesas = document.getElementById('listaDespesas')
+
+    //Percorrer o array despesas, listando despesa de forma dinâmica
+    despesas.forEach(function (d) {
+
+        //Criando a linha (tr)
+        let linha = listaDespesas.insertRow()
+
+        //Criar as colunas (td)
+        linha.insertCell(0).innerHTML = `${d.dia} / ${d.mes} / ${d.ano}`
+
+        //ajustar o tipo, antes vinha só o número, 0, 1, 2... Referente as definições dentro do switch.
+        switch (d.tipo) {
+            case '1': d.tipo = 'Alimentação'
+                break
+            case '2': d.tipo = 'Educação'
+                break
+            case '3': d.tipo = 'Lazer'
+                break
+            case '4': d.tipo = 'Saúde'
+                break
+            case '5': d.tipo = 'Transporte'
+                break
+        }
+        
+        linha.insertCell(1).innerHTML = d.tipo
+        linha.insertCell(2).innerHTML = d.descricao
+        linha.insertCell(3).innerHTML = d.valor
+
+
+    })
 }
