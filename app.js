@@ -90,7 +90,7 @@ class Bd { //Aqui criamos a lógica de indices dinâmicos, achei massa pq ja ten
         return despesasFiltradas
     }
 
-    remover(id){
+    remover(id) {
         localStorage.removeItem(id)
     }
 }
@@ -171,7 +171,7 @@ function cadastrarDespesa() {
 
 function carregaListaDespesas(despesas = []) {
     // let despesas = [] //Recebendo o array ja verificado do localstorage ao carregar a página.
-    if(despesas.length == 0){
+    if (despesas.length == 0) {
         despesas = bd.recuperarTodosRegistros()
     }
 
@@ -211,12 +211,29 @@ function carregaListaDespesas(despesas = []) {
         btn.className = 'btn btn-danger'
         btn.innerHTML = '<i class ="fas fa-times"></i>'
         btn.id = `id_despesa_${d.id}` //Para não confundir muito..
-        btn.onclick = function(){
+        btn.onclick = function () {
             let id = this.id.replace('id_despesa_', '')
 
             bd.remover(id)
-            //att a pagina
-            window.location.reload()
+
+            //EXTRA: Abrir modal ao remover item (Depois de finalizar o curso)
+            let novoTitulo = document.getElementById('titulo_modal') 
+            let descricaoCampo = document.getElementById('cadastroSucesso')
+
+            //Capturando a class do elemento pai
+            let classeSuccess = novoTitulo.parentNode
+            classeSuccess.classList = 'modal-header text-danger'
+
+            //Alterando a classe do botão
+            let classeBotao = document.getElementById('btnVoltar')
+            classeBotao.classList = "btn btn-succses"
+
+            novoTitulo.innerHTML = 'Apagando...'
+            descricaoCampo.innerHTML = 'Item apagado com sucesso'
+
+            //Chamando o modal Sucesso pelo Jquery.
+            $('#modalRegistraDespesa').modal('show')
+                       
         }
 
         linha.insertCell(4).append(btn)
@@ -235,7 +252,7 @@ function pesquisarDespesa() {
 
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
-    let despesas= bd.pesquisar(despesa) //Função responsável por receber o retorno, e imprimir na view após filtrar/consulta.
+    let despesas = bd.pesquisar(despesa) //Função responsável por receber o retorno, e imprimir na view após filtrar/consulta.
 
     //Substituindo toda a lógica
     carregaListaDespesas(despesas)

@@ -124,11 +124,31 @@
         </table>
       </div>
     </div>
+    
     <!-- Rodapé -->
     <footer class="align-bottom">
       <p>©️ Desenvolvido por <a href="https://github.com/GuilhermeMDev" class="name">Guilherme Magioni</a></p>
     </footer>
 
+  </div>
+
+  <!-- Modal de Sucesso ao apagar (Implemento por contra própria ao finalizar o curso)-->
+  <div class="modal fade" id="modalRegistraDespesa" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div>
+          <h5 class="modal-title" id="titulo_modal"></h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="cadastroSucesso">
+        </div>
+        <div class="modal-footer">
+                      <!-- Aqui no onclick foi uma sacada minha -->
+            <button type="button" data-dismiss="modal" id="btnVoltar" onclick="window.location.reload()">Voltar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- imports -->
