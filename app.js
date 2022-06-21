@@ -120,8 +120,8 @@ function cadastrarDespesa() {
     if (despesa.validarDados()) {
         bd.gravar(despesa) //Salvando no localStorage ao criar um item
 
-        let novoTitulo = document.getElementById('titulo_modal') //Desafio utilizando apenas 1 modal, para exibir tanto certo quanto errado. **
-        let descricaoCampo = document.getElementById('cadastroSucesso')
+        let novoTitulo = document.getElementById('titulo_modal').innerHTML = 'Processando..' //Desafio utilizando apenas 1 modal, para exibir tanto certo quanto errado. **
+        let descricaoCampo = document.getElementById('cadastroSucesso').innerHTML = 'Despesa cadastrada com sucesso'
 
         //Capturando a class do elemento pai
         let classeSuccess = novoTitulo.parentNode
@@ -129,10 +129,7 @@ function cadastrarDespesa() {
 
         //Alterando a classe do botão
         let classeBotao = document.getElementById('btnVoltar')
-        classeBotao.classList = "btn btn-success"
-
-        novoTitulo.innerHTML = 'Registro inserido com sucesso'
-        descricaoCampo.innerHTML = 'Despesa cadastrada com sucesso'
+        classeBotao.classList = "btn btn-success"                
 
         //Chamando o modal Sucesso pelo Jquery.
         $('#modalRegistraDespesa').modal('show')
@@ -149,8 +146,8 @@ function cadastrarDespesa() {
 
     } else {
 
-        let novoTitulo = document.getElementById('titulo_modal')
-        let descricaoCampo = document.getElementById('cadastroSucesso')
+        let novoTitulo = document.getElementById('titulo_modal').innerHTML = 'Erro de gravação'
+        let descricaoCampo = document.getElementById('cadastroSucesso').innerHTML = 'Existem campos obrigatórios que não foram preenchidos'
 
         //Capturando a class do elemento pai
         let classeError = novoTitulo.parentNode
@@ -159,9 +156,6 @@ function cadastrarDespesa() {
         //Alterando a classe do botão
         let classeBotao = document.getElementById('btnVoltar')
         classeBotao.classList = "btn btn-danger"
-
-        novoTitulo.innerHTML = 'Erro de gravação'
-        descricaoCampo.innerHTML = 'Existem campos obrigatórios que não foram preenchidos'
 
         //Chamando o modal Error pelo Jquery.
         $('#modalRegistraDespesa').modal('show')
@@ -217,8 +211,8 @@ function carregaListaDespesas(despesas = []) {
             bd.remover(id)
 
             //EXTRA: Abrir modal ao remover item (Depois de finalizar o curso)
-            let novoTitulo = document.getElementById('titulo_modal') 
-            let descricaoCampo = document.getElementById('cadastroSucesso')
+            let novoTitulo = document.getElementById('titulo_modal').innerHTML = 'Apagando...'
+            let descricaoCampo = document.getElementById('cadastroSucesso').innerHTML = 'Item apagado com sucesso'
 
             //Capturando a class do elemento pai
             let classeSuccess = novoTitulo.parentNode
@@ -227,9 +221,6 @@ function carregaListaDespesas(despesas = []) {
             //Alterando a classe do botão
             let classeBotao = document.getElementById('btnVoltar')
             classeBotao.classList = "btn btn-succses"
-
-            novoTitulo.innerHTML = 'Apagando...'
-            descricaoCampo.innerHTML = 'Item apagado com sucesso'
 
             //Chamando o modal Sucesso pelo Jquery.
             $('#modalRegistraDespesa').modal('show')
