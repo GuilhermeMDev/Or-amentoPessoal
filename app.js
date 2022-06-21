@@ -120,8 +120,9 @@ function cadastrarDespesa() {
     if (despesa.validarDados()) {
         bd.gravar(despesa) //Salvando no localStorage ao criar um item
 
-        let novoTitulo = document.getElementById('titulo_modal').innerHTML = 'Processando..' //Desafio utilizando apenas 1 modal, para exibir tanto certo quanto errado. **
+        let novoTitulo = document.getElementById('titulo_modal') //Desafio utilizando apenas 1 modal, para exibir tanto certo quanto errado. **
         let descricaoCampo = document.getElementById('cadastroSucesso').innerHTML = 'Despesa cadastrada com sucesso'
+        novoTitulo.innerHTML = 'Processando..' //Por algum motivo o cod quebra se não tiver esse carinha aqui, amanhã vou ver pq. a ideia era ficar como na linha 124 a cima.. 
 
         //Capturando a class do elemento pai
         let classeSuccess = novoTitulo.parentNode
@@ -146,8 +147,9 @@ function cadastrarDespesa() {
 
     } else {
 
-        let novoTitulo = document.getElementById('titulo_modal').innerHTML = 'Erro de gravação'
+        let novoTitulo = document.getElementById('titulo_modal')
         let descricaoCampo = document.getElementById('cadastroSucesso').innerHTML = 'Existem campos obrigatórios que não foram preenchidos'
+        novoTitulo.innerHTML = 'Erro de gravação'
 
         //Capturando a class do elemento pai
         let classeError = novoTitulo.parentNode
@@ -211,8 +213,9 @@ function carregaListaDespesas(despesas = []) {
             bd.remover(id)
 
             //EXTRA: Abrir modal ao remover item (Depois de finalizar o curso)
-            let novoTitulo = document.getElementById('titulo_modal').innerHTML = 'Apagando...'
+            let novoTitulo = document.getElementById('titulo_modal')
             let descricaoCampo = document.getElementById('cadastroSucesso').innerHTML = 'Item apagado com sucesso'
+            novoTitulo.innerHTML = 'Apagando...' 
 
             //Capturando a class do elemento pai
             let classeSuccess = novoTitulo.parentNode
